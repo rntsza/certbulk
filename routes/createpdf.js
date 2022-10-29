@@ -58,10 +58,10 @@ router.post('/', function(req, res, next) {
             });
         
             // const fileName = "TesteNomeArquivo";
-            // const content = "Criando o certificado da Lari";
+            // const content = "Criando o certificado";
         
             // Quero colocar uma chave única para cada arquivo.
-            //const timeStamp = "colocar um datenow aqui ou um navigator.location";
+            const timeStamp = Date.now();
         
             // inline é o paramêtro que faz com que o pdf não baixe direto, mas sim abra no navegador, estou utilizando para o desenvolvimento.
             // No lugar de inline, se for para baixar direto, é attachment
