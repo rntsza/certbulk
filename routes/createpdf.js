@@ -10,7 +10,7 @@ const names = [
     { fileName: "File 4"},
 ]
 
-const mock = [
+const mocks = [
     {
         "user_name": "ALEXANDRE TORQUETI TOLOI",
         "description": "Treinamento sobre Assédio e Discriminação",
@@ -51,7 +51,7 @@ const mock = [
 
 router.post('/', function(req, res, next) {
     try {
-        names.map(name => {
+        mocks.map(mock => {
             const doc = new PDFDocument({
                 layout: "landscape",
                 size: "A4"
@@ -68,11 +68,12 @@ router.post('/', function(req, res, next) {
             // res.setHeader("Content-disposition", 'inline; filename="' + fileName + ".pdf" + '"');
             // res.setHeader("Content-type", "application/pdf");
         
-            const pdfStream = fs.createWriteStream(`public/certificateId/${name.fileName}.pdf`)
+            const pdfStream = fs.createWriteStream(`public/certificateId/${mock.user_name}.pdf`)
         
             doc.image("public/images/background_20220623105450912.png", 10, 10, { width: 825 });
+            // doc.image(`${mock.backgroundUrl}`, 10, 10, { width: 825 });
             
-            doc.fontSize(40).text(name.fileName, { align: "center"}, 315);
+            doc.fontSize(40).text(mock.user_name, { align: "center"}, 315);
         
         
             doc.pipe(pdfStream);
