@@ -2,15 +2,14 @@ var express = require('express');
 var router = express.Router();
 const app = express();
 
-var router = express.Router();
+// var router = express.Router();
 var PDFDocument = require('pdfkit');
 var fs = require("fs");
 var Joi = require('joi');
+const { jsPDF } = require("jspdf")
 
 /* lib connect */
-var connect = require('connect');
 var http = require('http');
-// var app = connect();
 
 // gzip/deflate outgoing responses
 var compression = require('compression');
@@ -34,35 +33,28 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 //create node.js http server and listen on port
 http.createServer(app).listen(4000);
-/* */
 
-
-const port = process.env.PORT || 4000;
 app.use(express.json({limit: '25mb'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
 
 app.post('/api/certificados', (req, res) => {
-  // console.log('Data', JSON.stringify(req.body))
   certificados = [];
-  certificados.push(JSON.stringify(req.body));
-  // console.log('Data certificados', certificados)
-  // var certificado = {
-  //   user_name: req.body.user_name,
-  //   description: req.body.description,
-  //   url: req.body.url,
-  //   customCssUrl: req.body.customCssUrl,
-  //   certificateId: req.body.certificateId,
-  //   backgroundUrl: req.body.backgroundUrl,
-  //   title: req.body.title,
-  //   certificateText: req.body.certificateText,
-  //   verse_background_url: req.body.verse_background_url,
-  //   certificateContent: req.body.certificateContent
-  // };
-  
-  certificados.forEach(element => {
-    console.log('dentro do foreach', element);
+  req.body.forEach(element => {
+    var certificado = {
+      user_name: element.user_name,
+      description: element.description,
+      url: element.url,
+      customCssUrl: element.customCssUrl,
+      certificateId: element.certificateId,
+      backgroundUrl: element.backgroundUrl,
+      title: element.title,
+      certificateText: element.certificateText,
+      verse_background_url: element.verse_background_url,
+      certificateContent: element.certificateContent
+    };
+    certificados.push(certificado);
   });
 
   try {
@@ -76,16 +68,17 @@ app.post('/api/certificados', (req, res) => {
       const pdfStream = fs.createWriteStream(`public/certificateId/${certificado.user_name}.pdf`)
       doc.image("public/images/background_20220623105450912.png", 10, 10, { width: 825 });
 
-      doc.fontSize(40).text(certificado.user_name, { align: "center"}, 315);
+      // doc.moveDown();
+      doc.fontSize(18).text(certificado.certificateText, {
+        align: "center"
+      }, 200)
       doc.pipe(pdfStream);
       doc.end();
     })
   } catch (error) {
     console.error("Error: ", error.message)
   } finally {
-    // res.redirect("/")
-    // console.log('terminou');
-    // res.send(certificados);
+    res.send("Result: Ok");
   }
 });
 

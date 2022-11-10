@@ -14,9 +14,7 @@
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
   <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
   <a href="#license">License</a>
 </p>
 
@@ -55,6 +53,7 @@ $ npm start
 This software uses the following open source packages:
 
 - [Node.js](https://nodejs.org/)
+- [PDFKit](https://pdfkit.org/)
 - [Marked - a markdown parser](https://github.com/chjj/marked)
 - Gifs are taken from [here](https://tenor.com/)
 - This Markdown are taken from [here](https://www.readme-templates.com/) made by [amitmerchant1990](https://github.com/amitmerchant1990)
