@@ -3,18 +3,8 @@ var router = express.Router();
 var fs = require("fs");
 var archiver = require("archiver");
 
-const names = [
-    { fileName: "File 1"},
-    { fileName: "File 2"},
-    { fileName: "File 3"},
-    { fileName: "File 4"},
-]
 router.post('/', function(req, res, next) {
     try {
-
-        // Quero colocar uma chave única para cada arquivo.
-        const timeStamp = Date.now();
-
         const archive = archiver("zip", {
             zlib: { level: 9 }
         });
@@ -24,11 +14,8 @@ router.post('/', function(req, res, next) {
             fs.createWriteStream(`public/certificateMass/certificates.zip`)
         );
 
-        names.map(name => {
-            archive.file(`public/CertificateId/${ names.fileName }.pdf`, {
-                name: `${name.fileName}.pdf`
-            });
-        });
+        dataPath = `public/CertificateId`
+        archive.directory(dataPath + '/', false);
         archive.finalize();
     } catch (error) {
         console.error("Error: ", error.message)
