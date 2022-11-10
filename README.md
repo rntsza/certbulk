@@ -72,7 +72,6 @@ MIT
 
 ---
 
-> [amitmerchant.com](https://www.amitmerchant.com) &nbsp;&middot;&nbsp;
 > GitHub [@reegomes](https://github.com/reegomes) &nbsp;&middot;&nbsp;
 > Twitter [@ree_gms](https://twitter.com/ree_gms)
 
